@@ -27,8 +27,16 @@ function App() {
   // 닫기 버튼 클릭
   const handleClose = () => {
     if (!isDataEqual(data, initialDataCopy) && !isSaved) {
-      alert("수정된 정보가 저장되지 않았습니다");
+      // 저장 안 된 변경사항이 있으면 confirm 창 표시
+      if (window.confirm("수정된 정보가 있습니다. 무시하고 창을 닫으시겠습니까?")) {
+        setData(initialDataCopy.map(item => ({ ...item }))); // 초기데이터로 복원
+        setIsSaved(true);
+        setEditMode(false); // 닫을 때 수정모드 해제
+        alert("닫았습니다");
+      }
+      // 취소하면 아무 동작 없음
     } else {
+      setEditMode(false); // 닫을 때 수정모드 해제
       alert("창 닫았음");
     }
   };
@@ -209,7 +217,7 @@ const DrawCanvas = ({ editMode, data, setData, scale, totalWidth, totalHeight })
       <svg
         width={totalWidth}
         height={totalHeight}
-        style={{ backgroundColor: "#D4F4FA" }}
+        style={{ backgroundColor: "#D4F4FA", userSelect: "none" }} // userSelect 추가
         onClick={handleSvgClick}
       >
         {/* 축선 */}
@@ -365,7 +373,7 @@ const DrawCanvas = ({ editMode, data, setData, scale, totalWidth, totalHeight })
                       fill="#555"
                       textAnchor="start"
                     >
-                      {`${xBaseOffset}x${yBaseOffset}`}
+                      {`${xBaseOffset},${yBaseOffset}`}
                     </text>
                     {select && shotX === 0 && shotY === 0 && (
                       <>
@@ -387,7 +395,7 @@ const DrawCanvas = ({ editMode, data, setData, scale, totalWidth, totalHeight })
                           fill="white"
                           fontWeight="bold"
                           textAnchor="middle"
-                          style={{ pointerEvents: "none" }}
+                          style={{ pointerEvents: "none", userSelect: "none" }} // 추가
                         >
                           +
                         </text>
@@ -409,7 +417,7 @@ const DrawCanvas = ({ editMode, data, setData, scale, totalWidth, totalHeight })
                           fill="white"
                           fontWeight="bold"
                           textAnchor="middle"
-                          style={{ pointerEvents: "none" }}
+                          style={{ pointerEvents: "none", userSelect: "none" }} // 추가
                         >
                           -
                         </text>
