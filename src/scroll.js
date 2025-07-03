@@ -1,31 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-const SmartCenteredSvg = () => {
+const CenteredSvg = () => {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
-  const wrapperRef = useRef(null);
-  const [svgIsBiggerThanContainer, setSvgIsBiggerThanContainer] = useState(true);
 
   useEffect(() => {
     const container = containerRef.current;
     const svg = svgRef.current;
 
-    if (!container || !svg) return;
+    if (container && svg) {
+      const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
+      const svgWidth = svg.viewBox.baseVal.width || svg.width.baseVal.value;
+      const svgHeight = svg.viewBox.baseVal.height || svg.height.baseVal.value;
 
-    const containerWidth = container.clientWidth;
-    const containerHeight = container.clientHeight;
-    const svgWidth = svg.width.baseVal.value;
-    const svgHeight = svg.height.baseVal.value;
+      // svg가 container보다 크면 scroll을 위해 static하게 둠
+      const isWide = svgWidth > containerWidth;
+      const isTall = svgHeight > containerHeight;
 
-    const isWider = svgWidth > containerWidth;
-    const isTaller = svgHeight > containerHeight;
-
-    setSvgIsBiggerThanContainer(isWider || isTaller);
-
-    if (isWider || isTaller) {
-      // 스크롤 중앙
-      container.scrollLeft = (svg.scrollWidth - containerWidth) / 2;
-      container.scrollTop = (svg.scrollHeight - containerHeight) / 2;
+      svg.style.position = isWide || isTall ? 'static' : 'absolute';
     }
   }, []);
 
@@ -37,41 +30,37 @@ const SmartCenteredSvg = () => {
         height: '400px',
         overflow: 'auto',
         border: '2px solid black',
-        display: svgIsBiggerThanContainer ? 'block' : 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        position: 'relative',
       }}
     >
-      <div
-        ref={wrapperRef}
+      <svg
+        ref={svgRef}
+        width="300"
+        height="200"
+        viewBox="0 0 300 200"
         style={{
-          flexShrink: 0,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          position: 'absolute', // 기본은 중앙 정렬
+          background: '#e0f7fa',
+          display: 'block',
         }}
       >
-        <svg
-          ref={svgRef}
-          width="300"
-          height="200"
-          style={{
-            display: 'block',
-            background: '#f0f0f0',
-          }}
+        <rect x="0" y="0" width="300" height="200" fill="#b2ebf2" />
+        <circle cx="150" cy="100" r="40" fill="tomato" />
+        <text
+          x="150"
+          y="100"
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fontSize="20"
         >
-          <rect x="0" y="0" width="300" height="200" fill="#e0f7fa" />
-          <circle cx="150" cy="100" r="40" fill="tomato" />
-          <text
-            x="150"
-            y="100"
-            fontSize="20"
-            textAnchor="middle"
-            dominantBaseline="middle"
-          >
-            I'm Centered
-          </text>
-        </svg>
-      </div>
+          CENTERED SVG
+        </text>
+      </svg>
     </div>
   );
 };
 
-export default SmartCenteredSvg;
+export default CenteredSvg;
