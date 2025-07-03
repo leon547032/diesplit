@@ -1,24 +1,29 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const CenteredSvg = () => {
+const TrulyCenteredSvg = () => {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const [isSvgSmaller, setIsSvgSmaller] = useState(true);
 
   useEffect(() => {
     const container = containerRef.current;
     const svg = svgRef.current;
 
-    if (container && svg) {
-      const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
-      const svgWidth = svg.viewBox.baseVal.width || svg.width.baseVal.value;
-      const svgHeight = svg.viewBox.baseVal.height || svg.height.baseVal.value;
+    if (!container || !svg) return;
 
-      // svg가 container보다 크면 scroll을 위해 static하게 둠
-      const isWide = svgWidth > containerWidth;
-      const isTall = svgHeight > containerHeight;
+    const containerW = container.clientWidth;
+    const containerH = container.clientHeight;
+    const svgW = svg.width.baseVal.value;
+    const svgH = svg.height.baseVal.value;
 
-      svg.style.position = isWide || isTall ? 'static' : 'absolute';
+    const smaller = svgW <= containerW && svgH <= containerH;
+    setIsSvgSmaller(smaller);
+
+    if (!smaller) {
+      // scroll 중앙으로 이동
+      container.scrollLeft = (svgW - containerW) / 2;
+      container.scrollTop = (svgH - containerH) / 2;
     }
   }, []);
 
@@ -28,39 +33,46 @@ const CenteredSvg = () => {
       style={{
         width: '600px',
         height: '400px',
-        overflow: 'auto',
         border: '2px solid black',
+        overflow: 'auto',
+        display: isSvgSmaller ? 'flex' : 'block',
+        justifyContent: 'center',
+        alignItems: 'center',
         position: 'relative',
       }}
     >
-      <svg
-        ref={svgRef}
-        width="300"
-        height="200"
-        viewBox="0 0 300 200"
+      <div
+        ref={wrapperRef}
         style={{
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          position: 'absolute', // 기본은 중앙 정렬
-          background: '#e0f7fa',
-          display: 'block',
+          flexShrink: 0,
+          width: 'fit-content',
+          height: 'fit-content',
         }}
       >
-        <rect x="0" y="0" width="300" height="200" fill="#b2ebf2" />
-        <circle cx="150" cy="100" r="40" fill="tomato" />
-        <text
-          x="150"
-          y="100"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fontSize="20"
+        <svg
+          ref={svgRef}
+          width="2000"
+          height="1000"
+          style={{
+            display: 'block',
+            background: '#f9f9f9',
+          }}
         >
-          CENTERED SVG
-        </text>
-      </svg>
+          <rect x="0" y="0" width="2000" height="1000" fill="#e0f7fa" />
+          <circle cx="100" cy="100" r="40" fill="tomato" />
+          <text
+            x="1000"
+            y="500"
+            fontSize="40"
+            textAnchor="middle"
+            dominantBaseline="middle"
+          >
+            🎯 Centered SVG
+          </text>
+        </svg>
+      </div>
     </div>
   );
 };
 
-export default CenteredSvg;
+export default TrulyCenteredSvg;
