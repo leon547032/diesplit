@@ -1,6 +1,72 @@
 import { useState } from 'react'
 import './App.css'
 
+// const initialData = [
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 100, yBase: 100, xCenter: 250, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 0, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 100, yBase: 400, xCenter: 250, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 1, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "T", xSize: 300, ySize: 200, xBase: 500, yBase: 100, xCenter: 650, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 2, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "T", xSize: 300, ySize: 200, xBase: 500, yBase: 400, xCenter: 650, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 3, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "B", xSize: 300, ySize: 200, xBase: 900, yBase: 100, xCenter: 1050, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 4, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "B", xSize: 300, ySize: 200, xBase: 900, yBase: 400, xCenter: 1050, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 5, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 1300, yBase: 100, xCenter: 1450, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 6, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 1300, yBase: 400, xCenter: 1450, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 7, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 1700, yBase: 100, xCenter: 1850, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 8, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 1700, yBase: 400, xCenter: 1850, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 9, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2100, yBase: 100, xCenter: 2250, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 10, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2100, yBase: 400, xCenter: 2250, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 11, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2500, yBase: 100, xCenter: 2650, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 12, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2500, yBase: 400, xCenter: 2650, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 13, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2900, yBase: 100, xCenter: 3050, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 14, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2900, yBase: 400, xCenter: 3050, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 15, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 3300, yBase: 100, xCenter: 3450, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 16, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 3300, yBase: 400, xCenter: 3450, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 17, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 3700, yBase: 100, xCenter: 3850, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 18, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 3700, yBase: 400, xCenter: 3850, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 19, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 4100, yBase: 100, xCenter: 4250, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 20, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 4100, yBase: 400, xCenter: 4250, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 21, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 4500, yBase: 100, xCenter: 4650, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 22, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 4500, yBase: 400, xCenter: 4650, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 23, stitchYn: "N", itemNm: "PDA", select: false },
+//   { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 4900, yBase: 100, xCenter: 5050, yCenter: 200, xShot: 20, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 22, stitchYn: "N", itemNm: "PDA", select: false },
+// ];
+
+const initialData = [
+  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 10, yBase: 10, xCenter: 20, yCenter: 25, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 0, stitchYn: "N", itemNm: "PDA", select: false },
+  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 40, yBase: 10, xCenter: 50, yCenter: 25, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 1, stitchYn: "N", itemNm: "PDA", select: false },
+  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "T", xSize: 20, ySize: 30, xBase: 10, yBase: 50, xCenter: 20, yCenter: 65, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 2, stitchYn: "N", itemNm: "PDA", select: false },
+  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "T", xSize: 20, ySize: 30, xBase: 40, yBase: 50, xCenter: 50, yCenter: 65, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 3, stitchYn: "N", itemNm: "PDA", select: false },
+  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "B", xSize: 20, ySize: 30, xBase: 10, yBase: 90, xCenter: 20, yCenter: 105, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 4, stitchYn: "N", itemNm: "PDA", select: false },
+  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "B", xSize: 20, ySize: 30, xBase: 40, yBase: 90, xCenter: 50, yCenter: 105, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 5, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 10, yBase: 130, xCenter: 20, yCenter: 145, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 6, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 40, yBase: 130, xCenter: 50, yCenter: 145, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 7, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 10, yBase: 170, xCenter: 20, yCenter: 185, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 8, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 40, yBase: 170, xCenter: 50, yCenter: 185, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 9, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 10, yBase: 210, xCenter: 20, yCenter: 225, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 10, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 40, yBase: 210, xCenter: 50, yCenter: 225, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 11, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 10, yBase: 250, xCenter: 20, yCenter: 265, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 12, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 40, yBase: 250, xCenter: 50, yCenter: 265, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 13, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 10, yBase: 290, xCenter: 20, yCenter: 305, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 14, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 40, yBase: 290, xCenter: 50, yCenter: 305, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 15, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 10, yBase: 330, xCenter: 20, yCenter: 345, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 16, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 40, yBase: 330, xCenter: 50, yCenter: 345, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 17, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 10, yBase: 370, xCenter: 20, yCenter: 385, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 18, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 40, yBase: 370, xCenter: 50, yCenter: 385, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 19, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 10, yBase: 410, xCenter: 20, yCenter: 425, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 20, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 40, yBase: 410, xCenter: 50, yCenter: 425, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 21, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 10, yBase: 450, xCenter: 20, yCenter: 465, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 22, stitchYn: "N", itemNm: "PDA", select: false },
+  // { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 20, ySize: 30, xBase: 40, yBase: 450, xCenter: 50, yCenter: 465, xShot: 1, yShot: 1, xScribeSize: 10, yScribeSize: 10, sort: 23, stitchYn: "N", itemNm: "PDA", select: false },
+];
+
+// 컴포넌트 밖에서 초기 데이터 복사 (참조 분리)
+let initialDataCopy = initialData.map(item => ({ ...item }));
+
+// const SCALE = 3.5;
+const MIN_SIZE = 70;
+const MAX_SIZE = 100;
+const PADDING = 10;
+
+// SVG_HEIGHT만 사용, SVG_WIDTH는 필요 없음
+const SVG_HEIGHT = 600;
+
 function App() {
   const [editMode, setEditMode] = useState(false);
   const [data, setData] = useState(initialData);
@@ -47,36 +113,42 @@ function App() {
     setIsSaved(false);
   };
 
-  // 모든 사각형의 xSize, ySize 중 최대값과 최소값 구하기
-  const allSizes = data.flatMap(d => [d.xSize, d.ySize]);
-  const minSide = Math.min(...allSizes);
-  const maxSide = Math.max(...allSizes);
+  // 모든 사각형의 ySize가 MIN_SIZE 이상, MAX_SIZE 이하가 되도록 하는 scale 계산
+  const scaleMinY = Math.max(...data.map(d => MIN_SIZE / d.ySize));
+  const scaleMaxY = Math.min(...data.map(d => MAX_SIZE / d.ySize));
 
-  // 전체 SCALE을 "최소값이 MIN_SIZE가 되고, 동시에 최대값도 MIN_SIZE가 되도록" 조정
-  // 즉, minSide가 MIN_SIZE가 되도록 배율을 키우고, maxSide가 MIN_SIZE가 되도록 배율을 줄임
-  // 둘 중 더 작은 배율을 선택 (그래야 둘 다 MIN_SIZE 이상이 됨)
-  const scaleForMin = MIN_SIZE / minSide;
-  const scaleForMax = MIN_SIZE / maxSide;
-  const dynamicScale = Math.min(scaleForMin, scaleForMax);
+  // contentHeight 계산용 임시 scale (1로 계산)
+  const tempContentHeight = Math.max(
+    ...data.flatMap(r =>
+      Array.from({ length: r.yShot || 1 }, (_, shotY) =>
+        (r.yBase + shotY * (r.ySize + r.yScribeSize) + r.ySize)
+      )
+    )
+  );
 
-  // DrawCanvas에서 사용할 width/height 계산 로직을 이곳으로 이동
-  const contentWidth = Math.max(
+  // SVG에 맞추기 위한 scale (세로만 맞춤)
+  const scaleFitHeight = (SVG_HEIGHT - PADDING * 2) / tempContentHeight;
+
+  // 가능한 scale 중 SVG에 가장 잘 맞는 값 선택
+  let dynamicScale = scaleFitHeight;
+  if (dynamicScale < scaleMinY) dynamicScale = scaleMinY;
+  if (dynamicScale > scaleMaxY) dynamicScale = scaleMaxY;
+
+  // 최종 content 크기
+  const contentHeight = tempContentHeight * dynamicScale;
+  const totalHeight = contentHeight + PADDING * 2;
+
+  // 가로는 제한 없이, 전체 사각형의 가장 오른쪽 끝까지 계산
+  const tempContentWidth = Math.max(
     ...data.flatMap(r =>
       Array.from({ length: r.xShot || 1 }, (_, shotX) =>
         (r.xBase + shotX * (r.xSize + r.xScribeSize) + r.xSize)
       )
     )
-  ) * dynamicScale;
-  const contentHeight = Math.max(
-    ...data.map(
-      (r) =>
-        r.yBase +
-        ((r.yShot || 1) - 1) * (r.ySize + r.yScribeSize) +
-        r.ySize
-    )
-  ) * dynamicScale;
-  const totalWidth = Math.max(CANVAS_WIDTH, contentWidth + PADDING * 2);
-  const totalHeight = Math.max(CANVAS_HEIGHT, contentHeight + PADDING * 2);
+  );
+  const contentWidth = tempContentWidth * dynamicScale;
+  const totalWidth = contentWidth + PADDING * 2;
+
 
   return (
     <div>
@@ -112,46 +184,6 @@ function App() {
     </div>
   );
 }
-
-const initialData = [
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 100, yBase: 100, xCenter: 250, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 0, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 100, yBase: 400, xCenter: 250, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 1, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "T", xSize: 300, ySize: 200, xBase: 500, yBase: 100, xCenter: 650, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 2, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "T", xSize: 300, ySize: 200, xBase: 500, yBase: 400, xCenter: 650, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 3, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "B", xSize: 300, ySize: 200, xBase: 900, yBase: 100, xCenter: 1050, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 4, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "B", xSize: 300, ySize: 200, xBase: 900, yBase: 400, xCenter: 1050, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 5, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 1300, yBase: 100, xCenter: 1450, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 6, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 1300, yBase: 400, xCenter: 1450, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 7, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 1700, yBase: 100, xCenter: 1850, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 8, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 1700, yBase: 400, xCenter: 1850, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 9, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2100, yBase: 100, xCenter: 2250, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 10, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2100, yBase: 400, xCenter: 2250, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 11, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2500, yBase: 100, xCenter: 2650, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 12, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2500, yBase: 400, xCenter: 2650, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 13, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2900, yBase: 100, xCenter: 3050, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 14, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 2900, yBase: 400, xCenter: 3050, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 15, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 3300, yBase: 100, xCenter: 3450, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 16, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 3300, yBase: 400, xCenter: 3450, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 17, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 3700, yBase: 100, xCenter: 3850, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 18, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 3700, yBase: 400, xCenter: 3850, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 19, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 4100, yBase: 100, xCenter: 4250, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 20, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 4100, yBase: 400, xCenter: 4250, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 21, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 4500, yBase: 100, xCenter: 4650, yCenter: 200, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 22, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 4500, yBase: 400, xCenter: 4650, yCenter: 500, xShot: 1, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 23, stitchYn: "N", itemNm: "PDA", select: false },
-  { deviceCode: "MDB13", mapGrp: "DEFAULT", stitchDrtn: "", xSize: 300, ySize: 200, xBase: 4900, yBase: 100, xCenter: 5050, yCenter: 200, xShot: 20, yShot: 1, xScribeSize: 100, yScribeSize: 100, sort: 22, stitchYn: "N", itemNm: "PDA", select: false },
-];
-
-// 컴포넌트 밖에서 초기 데이터 복사 (참조 분리)
-let initialDataCopy = initialData.map(item => ({ ...item }));
-
-const SCALE = 3.5;
-const MIN_SIZE = 100;
-const PADDING = 50;
-
-// 캔버스 기본 사이즈 상수 선언
-const CANVAS_WIDTH = 800;
-const CANVAS_HEIGHT = 400;
-
 
 function incrementChar(char) {
   if (!char) return "A";
@@ -207,8 +239,6 @@ const DrawCanvas = ({ editMode, data, setData, scale, totalWidth, totalHeight })
   return (
     <div
       style={{
-        minWidth: totalWidth,
-        maxWidth: "100vw",
         overflow: "auto",
         display: "flex",
         justifyContent: "center",
@@ -220,32 +250,6 @@ const DrawCanvas = ({ editMode, data, setData, scale, totalWidth, totalHeight })
         style={{ backgroundColor: "#D4F4FA", userSelect: "none" }} // userSelect 추가
         onClick={handleSvgClick}
       >
-        {/* 축선 */}
-        <line
-          x1={PADDING}
-          y1={PADDING - 20}
-          x2={PADDING}
-          y2={totalHeight - PADDING + 20}
-          stroke="#000"
-          strokeDasharray="4"
-        />
-        <line
-          x1={PADDING - 20}
-          y1={totalHeight - PADDING}
-          x2={totalWidth - PADDING + 20}
-          y2={totalHeight - PADDING}
-          stroke="#000"
-          strokeDasharray="4"
-        />
-        <text
-          x={PADDING - 20}
-          y={totalHeight - PADDING + 15}
-          fontSize="10"
-          fill="red"
-        >
-          0,0
-        </text>
-
         {data.map(
           (
             {
@@ -340,12 +344,13 @@ const DrawCanvas = ({ editMode, data, setData, scale, totalWidth, totalHeight })
                     {/* 좌측상단에 xSize, ySize 표시 */}
                     <text
                       x={xPos + 2}
-                      y={yPos + 10}
+                      y={yPos + 7}
                       fontSize="7"
                       fill="#333"
                       textAnchor="start"
                     >
-                      {`${xSize}×${ySize}`}
+                      {`${Math.round(width)}×${Math.round(height)}`}
+                      {/* {`${xSize}×${ySize}`} */}
                     </text>
                     <text
                       x={xPos + width - 2}
